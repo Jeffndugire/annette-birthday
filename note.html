@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Birthday Note 💌</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="letter-container">
+        <h1>Happy Birthday, Annette! 💕</h1>
+        <div class="letter-card">
+            <p class="letter-text">
+                Dear Annette 💖,<br><br>
+                I wanna take this moment today to tell u how special you're and actually meeting u this year have to be one of the great things that have happened to me. You are so lovely and I wanna acknowledge all the times u have been there for me and also for supporting me and I love u for that 😂.<br><br>
+                This year wasn't too good for u, but in 2026 we are going big and am rooting for u girl 😚.<br><br>
+                I also wanna say that the memories that we had, I still remember them and nothing can make me forget them because u are so special to me and it's hard for me to accept all that has happened. Just know that u will always have a special place in my heart. May u have a happy birthday and a great year ahead, Annette ✨<br><br>
+                With love,<br>
+                Jeff
+            </p>
+        </div>
+        <button onclick="window.location.href='gifts.html'">Back to Gifts</button>
+    </div>
+
+    <!-- Background music -->
+    <audio id="bgMusic" loop>
+        <source src="images/bg-music.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Script for persistent background music -->
+    <script>
+        const bgMusic = document.getElementById("bgMusic");
+
+        window.addEventListener("load", () => {
+            const savedTime = localStorage.getItem("musicTime");
+            const wasPlaying = localStorage.getItem("musicPlaying");
+
+            bgMusic.volume = 0.05; // soft background
+
+            if (savedTime) {
+                bgMusic.currentTime = parseFloat(savedTime);
+            }
+
+            if (wasPlaying === "true") {
+                bgMusic.play().catch(() => {});
+            }
+        });
+
+        setInterval(() => {
+            localStorage.setItem("musicTime", bgMusic.currentTime);
+        }, 1000);
+
+        bgMusic.addEventListener("play", () => {
+            localStorage.setItem("musicPlaying", "true");
+        });
+
+        bgMusic.addEventListener("pause", () => {
+            localStorage.setItem("musicPlaying", "false");
+        });
+
+        // Start music after first user interaction (required on some browsers)
+        document.addEventListener("click", () => {
+            if (bgMusic.paused) {
+                bgMusic.play().catch(() => {});
+            }
+        }, { once: true });
+    </script>
+
+</body>
+</html>

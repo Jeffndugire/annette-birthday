@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday Annette 💖</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="startup-container">
+    <h1 class="birthday-title">💖 Happy Birthday Annette 💖</h1>
+
+    <img src="images/kitty.gif.png" alt="Cute Kitty" class="kitty">
+
+    <p>Do you want to see your gifts?</p>
+
+    <div class="buttons">
+        <button id="yesBtn" onclick="window.location.href='gifts.html'">Yes</button>
+        <button id="noBtn">Nope</button>
+    </div>
+
+    <p id="noMsg" class="hidden">😢 I promise you’ll like it!</p>
+</div>
+
+<!-- Hearts container -->
+<div id="hearts"></div>
+
+<!-- Background music -->
+<audio id="bgMusic" loop>
+    <source src="images/bg-music.mp3"audio/mpeg">
+</audio>
+
+<script>
+/* ----------------- BACKGROUND MUSIC ----------------- */
+const bgMusic = document.getElementById("bgMusic");
+
+window.addEventListener("load", () => {
+    const savedTime = localStorage.getItem("musicTime");
+    const wasPlaying = localStorage.getItem("musicPlaying");
+
+    bgMusic.volume = 0.05; // soft background
+
+    if (savedTime) bgMusic.currentTime = parseFloat(savedTime);
+    if (wasPlaying === "true") bgMusic.play().catch(() => {});
+});
+
+setInterval(() => {
+    localStorage.setItem("musicTime", bgMusic.currentTime);
+}, 1000);
+
+bgMusic.addEventListener("play", () => localStorage.setItem("musicPlaying", "true"));
+bgMusic.addEventListener("pause", () => localStorage.setItem("musicPlaying", "false"));
+
+document.addEventListener("click", () => {
+    if (bgMusic.paused) bgMusic.play().catch(() => {});
+}, { once: true });
+
+/* ----------------- NO BUTTON FUNCTION ----------------- */
+const noBtn = document.getElementById('noBtn');
+const noMsg = document.getElementById('noMsg');
+noBtn.addEventListener('click', () => {
+    noMsg.classList.remove('hidden');
+});
+
+/* ----------------- SMOOTH FLOATING HEARTS ----------------- */
+const heartsContainer = document.getElementById('hearts');
+
+function createHeart() {
+    const heart = document.createElement('div');
+    heart.classList.add('heart');
+    heart.innerText = '❤️';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.fontSize = (15 + Math.random() * 25) + 'px';
+    heart.style.animationDuration = (5 + Math.random() * 5) + 's';
+    heart.style.animationDelay = (Math.random() * 3) + 's';
+    heartsContainer.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 12000);
+}
+
+setInterval(createHeart, 400);
+</script>
+
+</body>
+</html>
