@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Photo Gallery 📸</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="gallery">
+        <h1>Happy Memories 💖</h1>
+        <div class="photos-grid">
+           <img src="images/photo.png1.jpg" alt="Memory 1">
+           <img src="images/photo.png2.jpg" alt="Memory 2">
+           <img src="images/photo.png3.jpg" alt="Memory 3">
+           <img src="images/photo.png4.jpg" alt="Memory 4">
+           <img src="images/photo.png5.jpg" alt="Memory 5">
+           <img src="images/photo.png6.jpg" alt="Memory 6">
+           <img src="images/photo.png7.jpg" alt="Memory 7">
+           <img src="images/photo.png8.jpg" alt="Memory 8">
+           <img src="images/photo.png9.jpg" alt="Memory 9"> 
+
+        </div>
+        <button onclick="window.location.href='gifts.html'">Back to Gifts</button>
+    </div>
+
+    <!-- Background music -->
+    <audio id="bgMusic" loop>
+        <source src="images/bg-music.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Script for persistent background music -->
+    <script>
+        const bgMusic = document.getElementById("bgMusic");
+
+        window.addEventListener("load", () => {
+            const savedTime = localStorage.getItem("musicTime");
+            const wasPlaying = localStorage.getItem("musicPlaying");
+
+            bgMusic.volume = 0.05; // soft background
+
+            if (savedTime) {
+                bgMusic.currentTime = parseFloat(savedTime);
+            }
+
+            if (wasPlaying === "true") {
+                bgMusic.play().catch(() => {});
+            }
+        });
+
+        setInterval(() => {
+            localStorage.setItem("musicTime", bgMusic.currentTime);
+        }, 1000);
+
+        bgMusic.addEventListener("play", () => {
+            localStorage.setItem("musicPlaying", "true");
+        });
+
+        bgMusic.addEventListener("pause", () => {
+            localStorage.setItem("musicPlaying", "false");
+        });
+
+        // Start music after first user interaction
+        document.addEventListener("click", () => {
+            if (bgMusic.paused) {
+                bgMusic.play().catch(() => {});
+            }
+        }, { once: true });
+    </script>
+
+</body>
+</html>

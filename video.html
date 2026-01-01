@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>video page 🎉</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="video-page">
+
+    <h1 class="video-title">Surprise Annette 💖</h1>
+    <p class="video-subtitle">Here is something special for u twin</p>
+
+    <div class="video-card">
+        <iframe 
+            src="https://www.youtube.com/embed/jl9WqGEJWak"
+            allowfullscreen>
+        </iframe>
+    </div>
+
+    <button class="back-btn" onclick="window.history.back()">
+        Back
+    </button>
+
+</div>
+
+
+    <!-- Background music -->
+    <audio id="bgMusic" loop>
+        <source src="images/bg-music.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Script for persistent background music -->
+    <script>
+        const bgMusic = document.getElementById("bgMusic");
+
+        window.addEventListener("load", () => {
+            const savedTime = localStorage.getItem("musicTime");
+            const wasPlaying = localStorage.getItem("musicPlaying");
+
+            bgMusic.volume = 0.05; // soft background
+
+            if (savedTime) {
+                bgMusic.currentTime = parseFloat(savedTime);
+            }
+
+            if (wasPlaying === "true") {
+                bgMusic.play().catch(() => {});
+            }
+        });
+
+        setInterval(() => {
+            localStorage.setItem("musicTime", bgMusic.currentTime);
+        }, 1000);
+
+        bgMusic.addEventListener("play", () => {
+            localStorage.setItem("musicPlaying", "true");
+        });
+
+        bgMusic.addEventListener("pause", () => {
+            localStorage.setItem("musicPlaying", "false");
+        });
+
+        // Start music after first user interaction
+        document.addEventListener("click", () => {
+            if (bgMusic.paused) {
+                bgMusic.play().catch(() => {});
+            }
+        }, { once: true });
+    </script>
+
+</body>
+</html>

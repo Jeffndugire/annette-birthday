@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Annette's Gifts 🎁</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Background music (continue from first page) -->
+<audio id="bgMusic" loop>
+    <source src="images/bg-music.mp3" type="audio/mpeg">
+</audio>
+
+<div class="gifts-container">
+
+    <!-- Cake Section -->
+    <div class="cake-section">
+        <h1>Happy Birthday, Annette! 🎂</h1>
+        <div class="cake-container">
+            <img src="images/cake.png.png" alt="Birthday Cake" class="cake">
+            <div class="candles">
+                <div class="candle" id="candle1"></div>
+                <div class="candle" id="candle2"></div>
+                <div class="candle" id="candle3"></div>
+                <div class="candle" id="candle4"></div>
+                <div class="candle" id="candle5"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Birthday Song Button -->
+    <div class="song-section">
+        <p>🎤 Click below to hear me sing Happy Birthday!</p>
+        <button id="playSongBtn">Play My Song 🎶</button>
+        <audio id="happyBdaySong">
+            <source src="images/bdaysonggg.mp3.m4a" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <!-- Virtual Gifts -->
+    <div class="virtual-gifts">
+        <h2>🎁 Your Gifts</h2>
+        <div class="gifts-grid">
+            <a href="note.html"><img src="images/bdaynote.png" alt="Birthday Note"></a>
+            <a href="gallery.html"><img src="images/gallery.png" alt="Photo Gallery"></a>
+            <a href="video.html"><img src="images/video.mp3.png" alt="Birthday Video"></a>
+        </div>
+    </div>
+
+    <!-- Back Button -->
+    <div class="back-button-container">
+    <button class="back-btn" onclick="window.location.href='index.html'">Back</button>
+</div>
+
+
+</div>
+
+<script>
+/* ----------------- BACKGROUND MUSIC ----------------- */
+const bgMusic = document.getElementById("bgMusic");
+
+window.addEventListener("load", () => {
+    const savedTime = localStorage.getItem("musicTime");
+    const wasPlaying = localStorage.getItem("musicPlaying");
+
+    bgMusic.volume = 0.05;
+
+    if (savedTime) bgMusic.currentTime = parseFloat(savedTime);
+    if (wasPlaying === "true") bgMusic.play().catch(() => {});
+});
+
+setInterval(() => {
+    localStorage.setItem("musicTime", bgMusic.currentTime);
+}, 1000);
+
+bgMusic.addEventListener("play", () => localStorage.setItem("musicPlaying", "true"));
+bgMusic.addEventListener("pause", () => localStorage.setItem("musicPlaying", "false"));
+
+document.addEventListener("click", () => {
+    if (bgMusic.paused) bgMusic.play().catch(() => {});
+}, { once: true });
+
+/* ----------------- PLAY SINGING AUDIO ----------------- */
+const playBtn = document.getElementById('playSongBtn');
+const song = document.getElementById('happyBdaySong');
+
+playBtn.addEventListener('click', () => {
+    song.play();
+});
+</script>
+
+</body>
+</html>

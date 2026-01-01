@@ -1,0 +1,473 @@
+/* ---------------- BODY ---------------- */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    background-color: #fab9b9; /* soft lowkey red */
+    color: #333;
+    overflow-x: hidden;
+}
+
+/* ---------------- STARTUP PAGE ---------------- */
+.startup-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; /* horizontally center */
+    text-align: center;
+    height: 100vh;
+}
+
+.birthday-title {
+    color: #ff4d6d;
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.kitty {
+    width: 250px;
+    margin-bottom: 20px;
+}
+
+.buttons button {
+    margin: 10px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 18px;
+    background-color: #ff4d6d;
+    color: rgb(0, 0, 0);
+    transition: transform 0.2s, background-color 0.3s;
+}
+
+.buttons button:hover {
+    transform: scale(1.05);
+    background-color: #d6336c;
+}
+
+/* ----------------- FLOATING HEARTS ----------------- */
+.heart {
+    position: absolute;
+    bottom: -50px; /* start slightly below the screen */
+    font-size: 1.5rem;
+    color: red;
+    pointer-events: none;
+    user-select: none;
+    animation: floatUp 8s linear infinite;
+    opacity: 0.7;
+}
+
+/* randomize horizontal positions with nth-child */
+.heart:nth-child(1) { left: 10%; animation-delay: 0s; }
+.heart:nth-child(2) { left: 25%; animation-delay: 1s; }
+.heart:nth-child(3) { left: 40%; animation-delay: 2s; }
+.heart:nth-child(4) { left: 60%; animation-delay: 3s; }
+.heart:nth-child(5) { left: 75%; animation-delay: 4s; }
+
+/* floating animation */
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.7;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-120vh) rotate(360deg); /* moves above the top */
+        opacity: 0;
+    }
+}
+
+
+/* ---------------- GIFTS PAGE ---------------- */
+.gifts-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+/* CAKE SECTION */
+.cake-section h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #d6336c;
+    text-shadow: 2px 2px 5px #ffb6c1;
+}
+
+.cake-container {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 20px;
+    z-index: 0;
+}
+
+.cake {
+    width: 250px;
+    height: 200px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    position: relative;
+    z-index: 1;
+}
+
+/* CANDLES */
+.candles {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 15px;
+    z-index: 2;
+}
+
+.candle {
+    width: 12px;
+    height: 35px;
+    background: linear-gradient(to top, #ffeb3b, #ff9800);
+    border-radius: 3px;
+    position: relative;
+    animation: flicker 1s infinite;
+    transition: opacity 0.5s;
+}
+
+.candle::after {
+    content: '';
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 5px;
+    height: 12px;
+    background: radial-gradient(circle, #ffecb3, #ff6f61);
+    border-radius: 50%;
+}
+
+@keyframes flicker {
+    0%, 100% { opacity: 1; transform: scaleY(1); }
+    50% { opacity: 0.8; transform: scaleY(0.9); }
+}
+
+/* SONG BUTTON */
+.song-section {
+    margin: 30px 0;
+}
+
+#playSongBtn {
+    padding: 10px 25px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 15px;
+    background-color: #ff6f91;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.3s;
+}
+
+#playSongBtn:hover {
+    transform: scale(1.1);
+    background-color: #d6336c;
+}
+
+/* GIFTS GRID */
+.gifts-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin: 30px 0;
+}
+
+.gifts-grid img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.gifts-grid img:hover {
+    transform: scale(1.1) rotate(-2deg);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+/* BACK BUTTON */
+.back-btn {
+    margin-top: 30px;
+    padding: 12px 25px;
+    font-size: 1rem;
+    border-radius: 15px;
+    border: none;
+    background-color: #ff4d6d;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.3s;
+}
+
+.back-btn:hover {
+    transform: scale(1.05);
+    background-color: #d6336c;
+}
+
+/* ---------------- SURPRISE PAGE ---------------- */
+.surprise-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #cdb4db, #f2e9e4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Comic Sans MS', cursive;
+}
+
+.surprise-card {
+    background: #fffaf5;
+    padding: 25px;
+    border-radius: 25px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+    text-align: center;
+    max-width: 350px;
+    animation: fadeIn 1.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.surprise-card button {
+    padding: 10px 20px;
+    background-color: #eb1212;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.3s;
+}
+
+.surprise-card button:hover {
+    transform: scale(1.05);
+    background-color: #5a3e7b;
+}
+/* ----------------- LETTER PAGE ----------------- */
+.letter-container {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #ffe6f0; /* soft pink paper-like background */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.letter-container h1 {
+    font-family: 'Comic Sans MS', cursive;
+    color: #d6336c;
+    text-shadow: 1px 1px 3px #ffb6c1;
+    margin-bottom: 25px;
+    font-size: 2.5rem;
+}
+
+.letter-card {
+    background-color: #fff5f8;
+    padding: 30px 25px;
+    max-width: 600px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    position: relative;
+}
+
+.letter-card::before {
+    content: "💌";
+    font-size: 3rem;
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.letter-text {
+    font-family: 'Comic Sans MS', cursive;
+    font-size: 1.1rem;
+    color: #333;
+    line-height: 1.6;
+    text-align: left;
+}
+
+button {
+    margin-top: 30px;
+    padding: 10px 25px;
+    font-size: 1rem;
+    border-radius: 12px;
+    border: none;
+    background-color: #ff6f91;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+    background-color: #d6336c;
+}
+.gallery{
+    text-align: center; /* center the heading */
+    padding: 30px;
+    background-color: #ffe6f2; /* soft pastel pink */
+    min-height: 100vh;
+}
+
+.gallery-container h1 {
+    font-family: 'Comic Sans MS', cursive;
+    color: #d6336c;
+    text-shadow: 1px 1px 3px #ffb6c1;
+    margin-bottom: 25px;
+    text-align: center; /* center heading */
+}
+/* --------- GALLERY CLEAN LAYOUT --------- */
+.photos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 images per row */
+    gap: 25px; /* space between images */
+    justify-items: center; /* centers images in each cell */
+    margin: 0 auto;
+    max-width: 900px; /* keeps grid centered */
+}
+
+.photos-grid img {
+    width: 100%;
+    max-width: 250px; /* uniform size */
+    height: 230px;
+    object-fit: cover;
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.photos-grid img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+/* Center the back button below gallery */
+.gallery button {
+    display: block;
+    margin: 40px auto 0 auto;
+    padding: 10px 25px;
+    font-size: 1rem;
+    border-radius: 12px;
+    border: none;
+    background-color: #ff4d6d;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.3s;
+}
+
+.gallery button:hover {
+    transform: scale(1.05);
+    background-color: #d6336c;
+}
+
+
+
+
+
+/* Surprise card animation */
+.surprise-card {
+    background: #fffaf5;
+    padding: 25px;
+    border-radius: 25px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+    text-align: center;
+    max-width: 380px;
+    animation: popIn 1.5s ease;
+}
+
+@keyframes popIn {
+    0% { opacity: 0; transform: scale(0.5) rotate(-10deg); }
+    100% { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+.surprise-card h1 {
+    color: #4b6cb7;
+    margin-bottom: 10px;
+}
+
+.soft-text {
+    color: #7c6a9e;
+    margin-bottom: 15px;
+}
+
+.surprise-card button {
+    padding: 10px 20px;
+    background-color: #ff7f50;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.3s;
+}
+
+.surprise-card button:hover {
+    transform: scale(1.05);
+    background-color: #d9534f;
+}
+
+
+.hidden {
+    display: none !important;
+}
+
+/* -------- VIDEO PAGE CENTERING -------- */
+.video-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;   /* horizontal center */
+    justify-content: center;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+/* Title */
+.video-title {
+    font-family: 'Comic Sans MS', cursive;
+    font-size: 2.5rem;
+    color: #d6336c;
+    margin-bottom: 10px;
+}
+
+/* Subtitle */
+.video-subtitle {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+/* Center back button */
+.video-page .back-btn {
+    margin-top: 40px;
+}
+/* ---------- BIGGER CENTER VIDEO ---------- */
+.video-card {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px 0;
+}
+
+.video-card iframe {
+    width: 90vw;              /* fills most of screen */
+    max-width: 1000px;        /* big but not crazy */
+    aspect-ratio: 16 / 9;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.35);
+}
